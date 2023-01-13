@@ -3,14 +3,14 @@
     {
       "id": 1,
       "text": "Salary",
-      "amount": 500,
+      "amount": 800,
       "type": "INCOME"
     },
     {
       "id": 2,
       "text": "Book",
-      "amount": 50,
-      "type": "EXPENSE"
+      "amount": 200,
+      "type": "INCOME"
     },
     {
       "id": 3,

@@ -1,6 +1,6 @@
 import Transaction from "./Transaction"
 
-const History = ({ transactions }) => {
+const History = ({ transactions, onUpdate }) => {
 
     return (
         <div className="history-list">
@@ -16,6 +16,8 @@ const History = ({ transactions }) => {
                             text={transaction.text}
                             amount={transaction.amount}
                             type={transaction.type}
+                            onUpdate={onUpdate}
+                            id={transaction.id}
                         />
                     )
                 })

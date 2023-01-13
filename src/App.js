@@ -67,6 +67,23 @@ function App() {
         setTransactions([...transactions, data]);
     }
 
+    const updateTask = async (transaction) => {
+        await fetch(
+            `http://localhost:5000/transactions/${transaction.id}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(transaction),
+            }
+        )
+
+        const data = await fetchTransactions();
+
+        setTransactions(data);
+    }
+
     const balance = getIncomeExpense().income - getIncomeExpense().expense;
 
 
@@ -76,7 +93,7 @@ function App() {
             <BalanceView balance={balance} />
             <IncomeExpenseCard getIncomeExpense={getIncomeExpense} />
 
-            <History transactions={transactions} />
+            <History transactions={transactions} onUpdate={updateTask}/>
             <AddTransaction onAdd={addTask} />
 
         </div>

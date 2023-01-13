@@ -55,7 +55,6 @@ const AddTransaction = ({ onAdd }) => {
             amount: num,
             type
         }
-
     }
     return (
         <div className="history-list">

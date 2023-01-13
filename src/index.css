@@ -8,6 +8,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: #f6f6f6;
 }
 
 .container {
@@ -15,10 +16,9 @@ body {
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: 1px solid #8473e3;
   padding: 30px;
   border-radius: 5px;
-  background-color: #f6f6f6;
 }
 
 .header {
@@ -84,6 +84,13 @@ body {
     border-radius: 1%;
 }
 
+.transaction-card-icon{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
 .expense{
     border-right: 0.3rem #b83228 solid;
 }
@@ -130,7 +137,7 @@ body {
 
 .btn {
   display: inline-block;
-  background: #000;
+  background: #8473e3;
   color: #fff;
   border: none;
   padding: 10px 20px;
