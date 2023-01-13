@@ -1,0 +1,45 @@
+{
+    "transactions": [
+        {
+            "id": 1,
+            "text": "Salary",
+            "amount": 500,
+            "type": "INCOME"
+        },
+        {
+            "id": 2,
+            "text": "Book",
+            "amount": 50,
+            "type": "EXPENSE"
+        },
+        {
+            "id": 3,
+            "text": "Cash",
+            "amount": 500,
+            "type": "INCOME"
+        },
+        {
+            "id": 4,
+            "text": "Camera",
+            "amount": 100,
+            "type": "EXPENSE"
+        }
+    ],
+    "posts": [
+        {
+            "id": 1,
+            "title": "json-server",
+            "author": "typicode"
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "some comment",
+            "postId": 1
+        }
+    ],
+    "profile": {
+        "name": "typicode"
+    }
+}
