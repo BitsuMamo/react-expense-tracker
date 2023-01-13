@@ -29,7 +29,7 @@ function App() {
         return data;
     }
 
-    const getIcomeExpense = () => {
+    const getIncomeExpense = () => {
         // const transactionsFromServer = a
 
 
@@ -47,18 +47,18 @@ function App() {
                 return total + transaction.amount
             }, 0)
 
-        return {income, expense}
+        return { income, expense }
 
     }
 
-    const balance = getIcomeExpense().income - getIcomeExpense().expense;
+    const balance = getIncomeExpense().income - getIncomeExpense().expense;
 
 
     return (
         <div className="container">
             <Header />
             <BalanceView balance={balance} />
-            <IncomeExpenseCard />
+            <IncomeExpenseCard getIncomeExpense={getIncomeExpense} />
 
             <History />
             <AddTransaction />

@@ -1,13 +1,14 @@
 import Expense from "./Expense"
 import Income from "./Income"
 
-const IncomeExpenseCard = () => {
+const IncomeExpenseCard = ({ getIncomeExpense }) => {
+    const { income, expense } = getIncomeExpense();
+
     return (
         <div className="income-expense-card">
-
-            <Income />
+            <Income income={income} />
             <div className="line"></div>
-            <Expense />
+            <Expense expense={expense} />
 
         </div>
     )

@@ -1,10 +1,10 @@
 
-const Expense = () => {
+const Expense = ({ expense }) => {
     return (
         <div className="income-expense">
             <p>EXPENSE</p>
             <p style={{ color: '#b83228' }}>
-                {`$ ${240}`}
+                {`$ ${expense}`}
             </p>
         </div>
     )
