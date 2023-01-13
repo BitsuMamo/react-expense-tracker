@@ -60,7 +60,7 @@ function App() {
             <BalanceView balance={balance} />
             <IncomeExpenseCard getIncomeExpense={getIncomeExpense} />
 
-            <History />
+            <History transactions={transactions}/>
             <AddTransaction />
 
         </div>

@@ -1,16 +1,27 @@
 import Transaction from "./Transaction"
 
-const History = () => {
+const History = ({ transactions }) => {
+
     return (
         <div className="history-list">
 
             <h3>History</h3>
             <hr />
 
+            {
+                transactions.map((transaction) => {
+                    return (
+                        <Transaction
+                            key={transaction.id}
+                            text={transaction.text}
+                            amount={transaction.amount}
+                            type={transaction.type}
+                        />
+                    )
+                })
+            }
 
-            <Transaction text={'Cash'} amount={500} type={'INCOME'} />
-            <Transaction text={'Book'} amount={40} type={'EXPENSE'} />
-            <Transaction text={'Camera'} amount={200} type={'EXPENSE'} />
+
 
         </div>
     )
