@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const UpdateTransaction = ({ id, onUpdate, oldText, oldAmount, type }) => {
+const UpdateTransaction = ({ id, onUpdate, oldText, oldAmount, type, setUpdateTransaction }) => {
     const [text, setText] = useState(oldText);
     const [amount, setAmount] = useState(
         `${type === 'INCOME' ? '+' : '-'}${oldAmount}`
@@ -31,12 +31,23 @@ const UpdateTransaction = ({ id, onUpdate, oldText, oldAmount, type }) => {
             ...result
         })
 
+        setUpdateTransaction(false);
+
     }
 
     const checkAmount = () => {
-        const sign = amount[0];
-        const numStr = amount.substring(1);
-        console.log(numStr)
+        const first = amount[0];
+
+        const sign = (first !== '+' && first !== '-') ? '+' : first;
+
+        let numStr;
+
+        if (isNaN(first)) {
+            numStr = amount.substring(1);
+        } else {
+            numStr = amount;
+        }
+
 
         if (sign !== '+' && sign !== '-') {
             alert("Use proper signs");

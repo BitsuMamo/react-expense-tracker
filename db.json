@@ -3,7 +3,7 @@
     {
       "id": 1,
       "text": "Salary",
-      "amount": 800,
+      "amount": 1000,
       "type": "INCOME"
     },
     {
@@ -29,6 +29,18 @@
       "amount": 10,
       "type": "INCOME",
       "id": 5
+    },
+    {
+      "text": "buna",
+      "amount": 5.5e+51,
+      "type": "EXPENSE",
+      "id": 6
+    },
+    {
+      "id": 7,
+      "text": "shai",
+      "amount": 6,
+      "type": "INCOME"
     }
   ]
 }

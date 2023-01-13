@@ -161,3 +161,7 @@ body {
   display: block;
   width: 100%;
 }
+
+.update-icon:hover{
+    color: #8473e3;
+}

@@ -30,11 +30,13 @@ const Transaction = ({ id, text, type, amount, onUpdate }) => {
                                 onClick={
                                     () => setUpdateTransaction(!updateTransaction)
                                 }
+                                className="update-icon"
                             /> :
                             <FaArrowDown
                                 onClick={
                                     () => setUpdateTransaction(!updateTransaction)
                                 }
+                                className="update-icon"
                             />
 
                     }
@@ -48,6 +50,7 @@ const Transaction = ({ id, text, type, amount, onUpdate }) => {
                     type={type}
                     oldAmount={amount}
                     onUpdate={onUpdate}
+                    setUpdateTransaction={setUpdateTransaction}
                     id={id}
                 />
             }
