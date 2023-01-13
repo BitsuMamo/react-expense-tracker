@@ -1,4 +1,62 @@
-const AddTransaction = () => {
+import { useState } from 'react'
+const AddTransaction = ({ onAdd }) => {
+    const [text, setText] = useState('');
+    const [amount, setAmount] = useState('');
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        if (!text) {
+            alert("Please add a text")
+            return
+        }
+
+        if (!amount) {
+            alert("Please add a amount")
+            return
+        }
+
+        const result = checkAmount();
+
+        if (!result) {
+            return
+        }
+
+        onAdd({
+            text,
+            ...result
+        })
+
+        setText('');
+        setAmount('');
+
+    }
+
+    const checkAmount = () => {
+        const sign = amount[0];
+        const numStr = amount.substring(1);
+        console.log(numStr)
+
+        if (sign !== '+' && sign !== '-') {
+            alert("Use proper signs");
+            return false
+        }
+
+        const type = sign === '+' ? 'INCOME' : 'EXPENSE';
+
+        if (isNaN(numStr)) {
+            alert("Please add proper amount");
+            return false
+        }
+
+        const num = Number(numStr)
+
+        return {
+            amount: num,
+            type
+        }
+
+    }
     return (
         <div className="history-list">
 
@@ -6,14 +64,14 @@ const AddTransaction = () => {
             <hr />
 
 
-            <form className='add-form' onSubmit={null}>
+            <form className='add-form' onSubmit={onSubmit}>
                 <div className='form-control'>
                     <label>Text</label>
                     <input
                         type='text'
                         placeholder='Enter Text'
-                    /* value={text}
-                    onChange={(e) => setText(e.target.value)} */
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
 
                     />
                 </div>
@@ -23,8 +81,8 @@ const AddTransaction = () => {
                     <input
                         type='text'
                         placeholder='Enter Amount'
-                    /* value={day}
-                    onChange={(e) => setDay(e.target.value)} */
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
 
                     />
                 </div>

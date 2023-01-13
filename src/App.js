@@ -51,6 +51,22 @@ function App() {
 
     }
 
+    const addTask = async (transaction) => {
+        const res = await fetch(
+            'http://localhost:5000/transactions',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(transaction),
+            }
+        )
+        const data = await res.json();
+
+        setTransactions([...transactions, data]);
+    }
+
     const balance = getIncomeExpense().income - getIncomeExpense().expense;
 
 
@@ -60,8 +76,8 @@ function App() {
             <BalanceView balance={balance} />
             <IncomeExpenseCard getIncomeExpense={getIncomeExpense} />
 
-            <History transactions={transactions}/>
-            <AddTransaction />
+            <History transactions={transactions} />
+            <AddTransaction onAdd={addTask} />
 
         </div>
     );
