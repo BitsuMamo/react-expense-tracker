@@ -1,12 +1,6 @@
 {
   "transactions": [
     {
-      "id": 1,
-      "text": "Salary",
-      "amount": 1000,
-      "type": "INCOME"
-    },
-    {
       "id": 2,
       "text": "Book",
       "amount": 200,
@@ -29,12 +23,6 @@
       "amount": 10,
       "type": "INCOME",
       "id": 5
-    },
-    {
-      "text": "buna",
-      "amount": 5.5e+51,
-      "type": "EXPENSE",
-      "id": 6
     },
     {
       "id": 7,

@@ -147,6 +147,7 @@ body {
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
+  transition: 0.5s;
 }
 
 .btn:focus {
@@ -162,6 +163,32 @@ body {
   width: 100%;
 }
 
+.btn-delete{
+    background-color: #b83228;
+}
+
+.btn-update{
+    background-color: #40bf72;
+}
+
+.btn:hover{
+    background-color: #000;
+}
+
 .update-icon:hover{
     color: #8473e3;
 }
+
+.update-icon{
+    transition: 0.5s
+}
+@-webkit-keyframes .fade-in {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+@keyframes .fade-in {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+

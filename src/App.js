@@ -5,6 +5,7 @@ import History from "./components/History";
 import AddTransaction from "./components/AddTransaction";
 
 import { useState, useEffect } from 'react';
+import Transaction from "./components/Transaction";
 
 
 function App() {
@@ -84,6 +85,13 @@ function App() {
         setTransactions(data);
     }
 
+    const deleteTransaction = async (id) => {
+        await fetch(`http://localhost:5000/transactions/${id}`, { method: 'DELETE', })
+
+        setTransactions(transactions.filter((transaction) => transaction.id !== id))
+    }
+
+
     const balance = getIncomeExpense().income - getIncomeExpense().expense;
 
 
@@ -93,7 +101,7 @@ function App() {
             <BalanceView balance={balance} />
             <IncomeExpenseCard getIncomeExpense={getIncomeExpense} />
 
-            <History transactions={transactions} onUpdate={updateTask}/>
+            <History transactions={transactions} onUpdate={updateTask} onDelete={deleteTransaction}/>
             <AddTransaction onAdd={addTask} />
 
         </div>

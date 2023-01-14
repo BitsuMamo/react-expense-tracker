@@ -1,35 +1,45 @@
 import { useState } from 'react';
 
-const UpdateTransaction = ({ id, onUpdate, oldText, oldAmount, type, setUpdateTransaction }) => {
+const UpdateTransaction = ({ id, onUpdate, oldText, oldAmount, type, setUpdateTransaction, onDelete }) => {
     const [text, setText] = useState(oldText);
     const [amount, setAmount] = useState(
         `${type === 'INCOME' ? '+' : '-'}${oldAmount}`
     );
 
+    const btnState = {
+        button: 1
+    }
+
     const onSubmit = (e) => {
-        e.preventDefault()
+        if (btnState.button === 1) {
+            e.preventDefault()
 
-        if (!text) {
-            alert("Please add a text")
-            return
+            if (!text) {
+                alert("Please add a text")
+                return
+            }
+
+            if (!amount) {
+                alert("Please add a amount")
+                return
+            }
+
+            const result = checkAmount();
+
+            if (!result) {
+                return
+            }
+
+            onUpdate({
+                id,
+                text,
+                ...result
+            })
         }
 
-        if (!amount) {
-            alert("Please add a amount")
-            return
+        if (btnState.button === 2) {
+            onDelete(id)
         }
-
-        const result = checkAmount();
-
-        if (!result) {
-            return
-        }
-
-        onUpdate({
-            id,
-            text,
-            ...result
-        })
 
         setUpdateTransaction(false);
 
@@ -100,10 +110,19 @@ const UpdateTransaction = ({ id, onUpdate, oldText, oldAmount, type, setUpdateTr
                     </div>
 
                     <input
+                        onClick={() => btnState.button = 1}
                         type='submit'
                         value='Update Transaction'
-                        className='btn btn-block'
+                        className='btn btn-block btn-update'
                     />
+
+                    <input
+                        onClick={() => btnState.button = 2}
+                        type='submit'
+                        value='Delete Transaction'
+                        className='btn btn-block btn-delete'
+                    />
+
                 </form>
 
             </div>

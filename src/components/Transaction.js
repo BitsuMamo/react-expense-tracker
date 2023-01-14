@@ -1,8 +1,8 @@
 import { useState } from "react"
 import UpdateTransaction from "./UpdateTransaction";
-import { FaArrowDown, FaArrowUp} from "react-icons/fa"
+import { FaArrowDown, FaArrowUp } from "react-icons/fa"
 
-const Transaction = ({ id, text, type, amount, onUpdate }) => {
+const Transaction = ({ id, text, type, amount, onUpdate, onDelete }) => {
     const [updateTransaction, setUpdateTransaction] = useState(false);
     return (
         <div>
@@ -50,6 +50,7 @@ const Transaction = ({ id, text, type, amount, onUpdate }) => {
                     type={type}
                     oldAmount={amount}
                     onUpdate={onUpdate}
+                    onDelete={onDelete}
                     setUpdateTransaction={setUpdateTransaction}
                     id={id}
                 />
