@@ -1,27 +1,29 @@
+import AddTransaction from "./components/AddTransaction";
 import BalanceView from "./components/BalanceView";
 import Header from "./components/Header";
-import IncomeExpenseCard from "./components/IcomeExpenseCard";
 import History from "./components/History";
-import AddTransaction from "./components/AddTransaction";
+import IncomeExpenseCard from "./components/IcomeExpenseCard";
+import Transaction from "./components/Transaction";
 
 import { useState, useEffect } from 'react';
-import Transaction from "./components/Transaction";
 
 
 function App() {
+
     const [transactions, setTransactions] = useState([])
 
+
+    // Loading the transactions data form the server
     useEffect(() => {
         const getData = async () => {
             const transactionsFromServer = await fetchTransactions();
-
             setTransactions(transactionsFromServer);
         }
-
         getData();
-
     }, [])
 
+
+    // Fetching all transactions data
     const fetchTransactions = async () => {
         const res = await fetch('http://localhost:5000/transactions');
 
@@ -30,10 +32,10 @@ function App() {
         return data;
     }
 
+
+
     const getIncomeExpense = () => {
-        // const transactionsFromServer = a
-
-
+        // Filters and adds all expense from transactions
         const expense = transactions.filter((transaction) => {
             return transaction.type === "EXPENSE";
         })
@@ -41,6 +43,7 @@ function App() {
                 return total + transaction.amount
             }, 0)
 
+        // Filters and adds all income from transactions
         const income = transactions.filter((transaction) => {
             return transaction.type === "INCOME";
         })
@@ -52,6 +55,8 @@ function App() {
 
     }
 
+
+    // Adds Task to the database 
     const addTask = async (transaction) => {
         const res = await fetch(
             'http://localhost:5000/transactions',
@@ -68,6 +73,7 @@ function App() {
         setTransactions([...transactions, data]);
     }
 
+    // Updates Task to the database 
     const updateTask = async (transaction) => {
         await fetch(
             `http://localhost:5000/transactions/${transaction.id}`,
@@ -85,6 +91,7 @@ function App() {
         setTransactions(data);
     }
 
+    // Deletes Task to the database 
     const deleteTransaction = async (id) => {
         await fetch(`http://localhost:5000/transactions/${id}`, { method: 'DELETE', })
 
@@ -97,11 +104,11 @@ function App() {
 
     return (
         <div className="container">
+
             <Header />
             <BalanceView balance={balance} />
             <IncomeExpenseCard getIncomeExpense={getIncomeExpense} />
-
-            <History transactions={transactions} onUpdate={updateTask} onDelete={deleteTransaction}/>
+            <History transactions={transactions} onUpdate={updateTask} onDelete={deleteTransaction} />
             <AddTransaction onAdd={addTask} />
 
         </div>
