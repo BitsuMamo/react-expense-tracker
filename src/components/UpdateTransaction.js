@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteTransaction, updateTransaction } from '../features/transaction/transactionSlice';
 
-const UpdateTransaction = ({ id, onUpdate, oldText, oldAmount, type, setUpdateTransaction, onDelete }) => {
+const UpdateTransaction = ({ transaction, setUpdateTransaction }) => {
+    const { id, text: oldText, amount: oldAmount, type } = { ...transaction };
+
     const [text, setText] = useState(oldText);
     const [amount, setAmount] = useState(
         `${type === 'INCOME' ? '+' : '-'}${oldAmount}`
     );
 
+    const dispatch = useDispatch()
     const btnState = {
         button: 1
     }
@@ -30,15 +35,12 @@ const UpdateTransaction = ({ id, onUpdate, oldText, oldAmount, type, setUpdateTr
                 return
             }
 
-            onUpdate({
-                id,
-                text,
-                ...result
-            })
+            dispatch(updateTransaction({ id, text, ...result }))
+
         }
 
         if (btnState.button === 2) {
-            onDelete(id)
+            dispatch(deleteTransaction(id))
         }
 
         setUpdateTransaction(false);
