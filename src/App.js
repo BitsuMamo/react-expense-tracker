@@ -6,22 +6,31 @@ import IncomeExpenseCard from "./components/IcomeExpenseCard";
 import Transaction from "./components/Transaction";
 
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getTransactions } from "./features/transaction/transactionSlice";
 
 
 function App() {
 
-    const [transactions, setTransactions] = useState([])
+    // const [transactions, setTransactions] = useState([])
+    const { isLoading, transactions } = useSelector((store) => store.transaction);
+    const dispatch = useDispatch();
+
+    useEffect(
+        () => {
+            dispatch(getTransactions());
+        }, [])
 
 
     // Loading the transactions data form the server
-    useEffect(() => {
+    /* useEffect(() => {
         const getData = async () => {
             const transactionsFromServer = await fetchTransactions();
             setTransactions(transactionsFromServer);
         }
         getData();
     }, [])
-
+*/
 
     // Fetching all transactions data
     const fetchTransactions = async () => {
@@ -70,7 +79,7 @@ function App() {
         )
         const data = await res.json();
 
-        setTransactions([...transactions, data]);
+        // setTransactions([...transactions, data]);
     }
 
     // Updates Task to the database 
@@ -88,18 +97,20 @@ function App() {
 
         const data = await fetchTransactions();
 
-        setTransactions(data);
+        // setTransactions(data);
     }
 
     // Deletes Task to the database 
     const deleteTransaction = async (id) => {
         await fetch(`http://localhost:5000/transactions/${id}`, { method: 'DELETE', })
 
-        setTransactions(transactions.filter((transaction) => transaction.id !== id))
+        // setTransactions(transactions.filter((transaction) => transaction.id !== id))
     }
 
 
     const balance = getIncomeExpense().income - getIncomeExpense().expense;
+
+    console.log(transactions);
 
 
     return (
