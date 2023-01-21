@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import History from "./components/History";
 import IncomeExpenseCard from "./components/IcomeExpenseCard";
 import Transaction from "./components/Transaction";
+import Loading from "./components/Loading";
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
@@ -34,9 +35,14 @@ function App() {
 
     // Fetching all transactions data
     const fetchTransactions = async () => {
-        const res = await fetch('http://localhost:5000/transactions');
+        const res = await fetch('http://localhost:5000/transactions')
 
-        const data = await res.json();
+
+        const data = await res.json()
+
+
+        setIsPending(false);
+
 
         return data;
     }
@@ -117,9 +123,15 @@ function App() {
         <div className="container">
 
             <Header />
-            <BalanceView balance={balance} />
-            <IncomeExpenseCard getIncomeExpense={getIncomeExpense} />
-            <History transactions={transactions} onUpdate={updateTask} onDelete={deleteTransaction} />
+            {
+                isPending ?
+                    <Loading /> :
+                    <>
+                        <BalanceView balance={balance} />
+                        <IncomeExpenseCard getIncomeExpense={getIncomeExpense} />
+                        <History transactions={transactions} onUpdate={updateTask} onDelete={deleteTransaction} />
+                    </>
+            }
             <AddTransaction onAdd={addTask} />
 
         </div>
