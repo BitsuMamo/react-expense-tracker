@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux"
 
-const BalanceView = ({balance}) => {
+const BalanceView = () => {
+    const { balance } = useSelector((store) => store.transaction);
     return (
         <div className="balance-view">
             <h4>Your Balance</h4>

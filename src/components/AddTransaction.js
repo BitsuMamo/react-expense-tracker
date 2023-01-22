@@ -1,7 +1,11 @@
 import { useState } from 'react'
-const AddTransaction = ({ onAdd }) => {
+import { useDispatch } from 'react-redux';
+import { addTransaction } from '../features/transaction/transactionSlice';
+const AddTransaction = () => {
     const [text, setText] = useState('');
     const [amount, setAmount] = useState('');
+
+    const dispatch = useDispatch();
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -22,10 +26,7 @@ const AddTransaction = ({ onAdd }) => {
             return
         }
 
-        onAdd({
-            text,
-            ...result
-        })
+        dispatch(addTransaction({ text, ...result }));
 
         setText('');
         setAmount('');

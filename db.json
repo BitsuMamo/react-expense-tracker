@@ -1,22 +1,10 @@
 {
   "transactions": [
     {
-      "id": 2,
-      "text": "Book",
-      "amount": 200,
-      "type": "INCOME"
-    },
-    {
-      "id": 3,
-      "text": "Cash",
-      "amount": 500,
-      "type": "INCOME"
-    },
-    {
       "id": 4,
       "text": "Camera",
       "amount": 100,
-      "type": "EXPENSE"
+      "type": "INCOME"
     },
     {
       "text": "help",
@@ -29,6 +17,60 @@
       "text": "shai",
       "amount": 6,
       "type": "INCOME"
+    },
+    {
+      "text": "h",
+      "amount": 90,
+      "type": "INCOME",
+      "id": 8
+    },
+    {
+      "text": "Coffee",
+      "amount": 90776,
+      "type": "EXPENSE",
+      "id": 9
+    },
+    {
+      "text": "sofas",
+      "amount": 200,
+      "type": "INCOME",
+      "id": 10
+    },
+    {
+      "text": "jk",
+      "amount": 67,
+      "type": "INCOME",
+      "id": 11
+    },
+    {
+      "text": "dfas",
+      "amount": 96,
+      "type": "INCOME",
+      "id": 12
+    },
+    {
+      "text": "dsaf",
+      "amount": 8956,
+      "type": "INCOME",
+      "id": 13
+    },
+    {
+      "text": "dfa",
+      "amount": 9,
+      "type": "INCOME",
+      "id": 14
+    },
+    {
+      "id": 15,
+      "text": "dfsa",
+      "amount": 1010,
+      "type": "INCOME"
+    },
+    {
+      "text": "dfasfds",
+      "amount": 892,
+      "type": "INCOME",
+      "id": 16
     }
   ]
 }

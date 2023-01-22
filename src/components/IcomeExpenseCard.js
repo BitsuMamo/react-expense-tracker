@@ -1,8 +1,10 @@
+import { useSelector } from "react-redux"
 import Expense from "./Expense"
 import Income from "./Income"
 
-const IncomeExpenseCard = ({ getIncomeExpense }) => {
-    const { income, expense } = getIncomeExpense();
+const IncomeExpenseCard = () => {
+    const { income, expense } = useSelector((store) => store.transaction);
+
 
     return (
         <div className="income-expense-card">

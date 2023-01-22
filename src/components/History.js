@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux"
 import Transaction from "./Transaction"
 
-const History = ({ transactions, onUpdate, onDelete }) => {
+const History = () => {
+    const { transactions } = useSelector((store) => store.transaction)
 
     return (
         <div className="history-list">
@@ -13,12 +15,7 @@ const History = ({ transactions, onUpdate, onDelete }) => {
                     return (
                         <Transaction
                             key={transaction.id}
-                            text={transaction.text}
-                            amount={transaction.amount}
-                            type={transaction.type}
-                            onUpdate={onUpdate}
-                            id={transaction.id}
-                            onDelete={onDelete}
+                            transaction={transaction}
                         />
                     )
                 })
