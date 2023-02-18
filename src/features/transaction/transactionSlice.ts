@@ -1,7 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { AsyncThunk, PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+import Transaction from '../../components/Transaction';
+import { IInitialState, ITransaction } from '../../types';
 
-const initialState = {
+const initialState: IInitialState = {
     transactions: [],
     balance: 0,
     income: 0,
@@ -11,7 +13,7 @@ const initialState = {
 
 export const getTransactions = createAsyncThunk(
     'transaction/getTransactions',
-    async (thunkAPI) => {
+    async (name: string = "getTransactions", thunkAPI) => {
         try {
             const res = await axios.get('http://localhost:5000/transactions');
             return res.data;
@@ -23,7 +25,7 @@ export const getTransactions = createAsyncThunk(
 
 export const addTransaction = createAsyncThunk(
     'transaction/addTransaction',
-    async (data, thunkAPI) => {
+    async (data: ITransaction, thunkAPI) => {
         try {
             await axios.post(
                 'http://localhost:5000/transactions',
@@ -38,7 +40,7 @@ export const addTransaction = createAsyncThunk(
 
 export const updateTransaction = createAsyncThunk(
     'transaction/updateTransaction',
-    async (data, thunkAPI) => {
+    async (data: ITransaction, thunkAPI) => {
         try {
             await axios.put(
                 `http://localhost:5000/transactions/${data.id}`,
@@ -55,7 +57,7 @@ export const updateTransaction = createAsyncThunk(
 
 export const deleteTransaction = createAsyncThunk(
     'transaction/deleteTransaction',
-    async (id, thunkAPI) => {
+    async (id: number, thunkAPI) => {
         try {
             await axios.delete(
                 `http://localhost:5000/transactions/${id}`,
@@ -71,8 +73,8 @@ const transactionSlice = createSlice({
     name: 'transaction',
     initialState,
     reducers: {
-        calculateIncome: (state) => {
-            const income = state.transactions.filter((transaction) => {
+        calculateIncome: (state: IInitialState): void => {
+            const income: number = state.transactions.filter((transaction) => {
                 return transaction.type === "INCOME";
             })
                 .reduce((total, transaction) => {
@@ -81,8 +83,8 @@ const transactionSlice = createSlice({
 
             state.income = income;
         },
-        calculateExpense: (state) => {
-            const expense = state.transactions.filter((transaction) => {
+        calculateExpense: (state: IInitialState): void => {
+            const expense: number = state.transactions.filter((transaction) => {
                 return transaction.type === "EXPENSE";
             })
                 .reduce((total, transaction) => {
@@ -90,93 +92,54 @@ const transactionSlice = createSlice({
                 }, 0)
             state.expense = expense;
         },
-        calculateBalance: (state) => {
+        calculateBalance: (state: IInitialState): void => {
             state.balance = state.income - state.expense;
         },
 
     },
     extraReducers: (builder) => {
         // Getting all Transactions from Server
-        builder.addCase(getTransactions.pending, (state) => {
+        builder.addCase(getTransactions.pending, (state: IInitialState) => {
             state.isLoading = true;
         })
 
-        builder.addCase(getTransactions.fulfilled, (state, action) => {
+        builder.addCase(getTransactions.fulfilled, (state: IInitialState, action: PayloadAction<ITransaction[]>) => {
             state.isLoading = false;
             state.transactions = action.payload;
         })
-        builder.addCase(getTransactions.rejected, (state) => {
+        builder.addCase(getTransactions.rejected, (state: IInitialState) => {
             state.isLoading = false;
         })
 
         // Adding a transaction to database
-        builder.addCase(addTransaction.pending, (state) => {
+        builder.addCase(addTransaction.pending, (state: IInitialState) => {
         })
-        builder.addCase(addTransaction.fulfilled, (state, action) => {
+
+        // TODO: USED any 
+        builder.addCase(addTransaction.fulfilled, (state: any, action: any) => {
             state.transactions = [...state.transactions, action.payload]
         })
+
         builder.addCase(addTransaction.rejected, (state) => {
         })
 
         // Deleting a transaction from database
         builder.addCase(deleteTransaction.pending, (state) => {
         })
-        builder.addCase(deleteTransaction.fulfilled, (state, action) => {
+        builder.addCase(deleteTransaction.fulfilled, (state: IInitialState, action: PayloadAction<Number | void>) => {
             state.transactions = state.transactions.filter((transaction) => transaction.id !== action.payload);
         })
-        builder.addCase(deleteTransaction.rejected, (state) => {
+        builder.addCase(deleteTransaction.rejected, (state: IInitialState) => {
         })
 
         // Updating a transaction from database
-        builder.addCase(updateTransaction.pending, (state) => {
+        builder.addCase(updateTransaction.pending, (state: IInitialState) => {
         })
-        builder.addCase(updateTransaction.fulfilled, (state) => {
+        builder.addCase(updateTransaction.fulfilled, (state: IInitialState) => {
         })
-        builder.addCase(updateTransaction.rejected, (state) => {
+        builder.addCase(updateTransaction.rejected, (state: IInitialState) => {
         })
     }
-
-
-    /* extraReducers: {
-        // Getting all Transactions from Server
-        [getTransactions.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [getTransactions.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.transactions = action.payload;
-        },
-        [getTransactions.rejected]: (state) => {
-            state.isLoading = false;
-        },
-
-        // Adding a transaction to database
-        [addTransaction.pending]: (state) => {
-        },
-        [addTransaction.fulfilled]: (state, action) => {
-            state.transactions = [...state.transactions, action.payload]
-        },
-        [addTransaction.rejected]: (state) => {
-        },
-
-        // Deleting a transaction from database
-        [deleteTransaction.pending]: (state) => {
-        },
-        [deleteTransaction.fulfilled]: (state, action) => {
-            state.transactions = state.transactions.filter((transaction) => transaction.id !== action.payload);
-        },
-        [deleteTransaction.rejected]: (state) => {
-        },
-
-        // Updating a transaction from database
-        [updateTransaction.pending]: (state) => {
-        },
-        [updateTransaction.fulfilled]: (state) => {
-        },
-        [updateTransaction.rejected]: (state) => {
-        },
-    }
-*/
 })
 
 export const { calculateIncome, calculateExpense, calculateBalance } = transactionSlice.actions;

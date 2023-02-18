@@ -3,23 +3,24 @@ import BalanceView from "./components/BalanceView";
 import Header from "./components/Header";
 import History from "./components/History";
 import IncomeExpenseCard from "./components/IcomeExpenseCard";
-import Transaction from "./components/Transaction";
 import Loading from "./components/Loading";
 
+
 import { useEffect } from 'react';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateIncome, calculateExpense, calculateBalance, getTransactions } from './features/transaction/transactionSlice';
+import { AppDispatch, RootState } from "./store";
 
 
-function App() {
+const App: React.FC = () => {
 
-    // const [transactions, setTransactions] = useState([])
-    const { isLoading, transactions } = useSelector((store) => store.transaction);
-    const dispatch = useDispatch();
+    const { isLoading, transactions } = useSelector((store: RootState) => store.transaction);
+    const dispatch: AppDispatch = useDispatch();
 
     useEffect(
         () => {
-            dispatch(getTransactions());
+            dispatch(getTransactions('Initial State'));
         }, [])
 
     useEffect(
