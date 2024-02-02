@@ -13,22 +13,10 @@
       "id": 5
     },
     {
-      "id": 7,
-      "text": "shai",
-      "amount": 6,
-      "type": "INCOME"
-    },
-    {
       "text": "h",
       "amount": 90,
       "type": "INCOME",
       "id": 8
-    },
-    {
-      "text": "Coffee",
-      "amount": 90776,
-      "type": "EXPENSE",
-      "id": 9
     },
     {
       "text": "sofas",
@@ -71,6 +59,18 @@
       "amount": 892,
       "type": "INCOME",
       "id": 16
+    },
+    {
+      "text": "dsaf",
+      "amount": 100000,
+      "type": "EXPENSE",
+      "id": 17
+    },
+    {
+      "text": "bnhjkhj",
+      "amount": 900,
+      "type": "INCOME",
+      "id": 18
     }
   ]
 }

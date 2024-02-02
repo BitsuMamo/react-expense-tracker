@@ -13,40 +13,40 @@ import { calculateIncome, calculateExpense, calculateBalance, getTransactions } 
 
 function App() {
 
-    // const [transactions, setTransactions] = useState([])
-    const { isLoading, transactions } = useSelector((store) => store.transaction);
-    const dispatch = useDispatch();
+  // const [transactions, setTransactions] = useState([])
+  const { isLoading, transactions } = useSelector((store) => store.transaction);
+  const dispatch = useDispatch();
 
-    useEffect(
-        () => {
-            dispatch(getTransactions());
-        }, [])
+  useEffect(
+    () => {
+      dispatch(getTransactions());
+    }, [])
 
-    useEffect(
-        () => {
-            dispatch(calculateIncome());
-            dispatch(calculateExpense());
-            dispatch(calculateBalance());
-        }, [transactions])
+  useEffect(
+    () => {
+      dispatch(calculateIncome());
+      dispatch(calculateExpense());
+      dispatch(calculateBalance());
+    }, [transactions])
 
 
-    return (
-        <div className="container dark">
+  return (
+    <div className="container dark">
 
-            <Header />
-            {
-                isLoading ?
-                    <Loading /> :
-                    <>
-                        <BalanceView />
-                        <IncomeExpenseCard />
-                        <History />
-                    </>
-            }
-            <AddTransaction />
+      <Header />
+      {
+        isLoading ?
+          <Loading /> :
+          <>
+            <BalanceView />
+            <IncomeExpenseCard />
+            <History />
+          </>
+      }
+      <AddTransaction />
 
-        </div>
-    );
+    </div>
+  );
 }
 
 export default App;
